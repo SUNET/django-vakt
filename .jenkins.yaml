@@ -1,0 +1,17 @@
+git:
+  branch: "ni-optimized"
+builders:
+  - script
+triggers:
+  cron: "@weekly"
+clean_workspace: true
+publish_over_ssh:
+  - pypi.sunet.se
+
+script:
+  - "virtualenv -p python3.7 venv"
+  - ". venv/bin/activate"
+  - "pip install --upgrade setuptools pip wheel"
+  #- "pip install --index-url https://pypi.sunet.se -r test_requirements.txt"
+  #- "pytest"
+  - "python setup.py sdist bdist_wheel --universal"
